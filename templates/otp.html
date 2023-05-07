@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP validation</title>
+    <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(142deg,#9861c2, #5cc0de);
+  font-family: "Lato", sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0;
+}
+.cta {
+  display: inline-block;
+  padding: 8px 20px;
+  color: white;
+  border-radius: 120px;
+  background-color: transparent;
+  border: 2px solid crimson;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-top: 30px;
+  transition: 0.3s ease;
+  transition-property: background-color, color;
+}
+.cta:hover {
+  color: white;
+  background-color: crimson;
+}
+
+.container{
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.code-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.code{
+  caret-color: transparent;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  border: 1px solid #eee;
+  font-size: 30px;
+  font-family: "Lato", sans-serif;
+  width: 75px;
+  height: 80px;
+  margin: 10px;
+  text-align: center;
+  font-weight: 300;
+}
+
+@media (max-width: 600px) {
+  .code-container{
+    flex-wrap: wrap;
+  }
+  .code{
+    font-size: 24px;
+    height: 50px;
+    max-width: 50px;
+    font-size: bold;
+  }
+}
+
+.code::-webkit-outer-spin-button,
+.code::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.code:valid {
+  border-color: #9861c2;
+  box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.25);
+}
+
+.btn{
+  font-family: "Lato", sans-serif;
+  min-width: 400px;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  margin: 0px 0px 20px 0px;
+  padding: 0.775rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7;
+}
+
+.btn-primary{
+  color: #fff;
+  background-color: #9861c2;
+  border-color: #9861c2;
+}
+    </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+  <script type="text/javascript">
+  const codes = document.querySelectorAll('.code')
+
+codes[0].focus()
+
+codes.forEach((code, idx) => {
+    code.addEventListener('keydown', (e) => {
+        if(e.key >= 0 && e.key <=9) {
+            codes[idx].value = ''
+            setTimeout(() => codes[idx + 1].focus(), 10)
+        } else if(e.key === 'Backspace') {
+            setTimeout(() => codes[idx - 1].focus(), 10)
+        }
+    })
+})</script>
+    <form method="POST" action="{{url_for('otp',otp=otp,fullname=fullname,password=password,email=email)}}">
+        <h1>Enter OTP</h1>
+        <input type="text" name="otp" class="cta"><br>
+        <button class="cta">submit</button>
+    </form>
+</body>
+</html>
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="style.css" />
+<title>Verification Account UI</title>
+<style>
+  * {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(142deg,#9861c2, #5cc0de);
+  font-family: "Lato", sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container{
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.code-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.code{
+  caret-color: transparent;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  border: 1px solid #eee;
+  font-size: 30px;
+  font-family: "Lato", sans-serif;
+  width: 75px;
+  height: 80px;
+  margin: 10px;
+  text-align: center;
+  font-weight: 300;
+}
+
+@media (max-width: 600px) {
+  .code-container{
+    flex-wrap: wrap;
+  }
+  .code{
+    font-size: 24px;
+    height: 50px;
+    max-width: 50px;
+    font-size: bold;
+  }
+}
+
+.code::-webkit-outer-spin-button,
+.code::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.code:valid {
+  border-color: #9861c2;
+  box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.25);
+}
+
+.btn{
+  font-family: "Lato", sans-serif;
+  min-width: 400px;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  margin: 0px 0px 20px 0px;
+  padding: 0.775rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7;
+}
+
+.btn-primary{
+  color: #fff;
+  background-color: #9861c2;
+  border-color: #9861c2;
+}
+  </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+
+
+  <form method="POST" action="{{url_for('otp',otp=otp,fullname=fullname,email=email,password=password)}}">
+  <div class="container">
+    <h2>Verify Your Account</h2>
+    <p>
+      We emailed you the six digit code to personal@email.com <br/>
+      Enter the code below to confirm your email address
+    </p>
+        
+    <div class="code-container">
+      <input type="number" class="code" placeholder="0" min="0" max="9" required>
+      <input type="number" class="code" placeholder="0" min="0" max="9" required>
+      <input type="number" class="code" placeholder="0" min="0" max="9" required>
+      <input type="number" class="code" placeholder="0" min="0" max="9" required>
+      <input type="number" class="code" placeholder="0" min="0" max="9" required>
+      <input type="number" class="code" placeholder="0" min="0" max="9" required>
+    </div>
+     <button>submit</button>
+  </div>
+
+<script src="script.js">
+  const codes = document.querySelectorAll('.code')
+
+codes[0].focus()
+
+codes.forEach((code, idx) => {
+    code.addEventListener('keydown', (e) => {
+        if(e.key >= 0 && e.key <=9) {
+            codes[idx].value = ''
+            setTimeout(() => codes[idx + 1].focus(), 10)
+        } else if(e.key === 'Backspace') {
+            setTimeout(() => codes[idx - 1].focus(), 10)
+        }
+    })
+})
+</script>
+</body>
+</html>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

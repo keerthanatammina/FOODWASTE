@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="multilayouts.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+.head{
+    font-family:cursive;
+    padding:50px;
+    color:aliceblue;
+    line-height: 1.5em;
+
+
+}
+
+.imagetree{
+    height:200px;
+    width:200px;
+    padding:5px;
+
+}
+.christamasscard:hover{
+    transform: scale(1.1);
+}
+.head2{
+    font-style: italic;
+    color:blue;
+    font-size:15px;
+
+}
+.christamasscard{
+    background-color: aliceblue;
+    border-radius:15px;
+    padding: 5px;
+    text-align: center;
+    margin-top:10px;
+    margin-right:10px;
+    margin-left: 20px;
+}
+.chrispara{
+    font-weight:bold;
+}
+.med{
+    border-radius:20px;
+    text-align: center;
+    padding:20px;
+    
+}
+.btn1{
+    background-color: rgb(216, 118, 188);
+    border-radius:15px;
+    border-width: 0px;
+    
+    width:150px;
+    padding: 5px;
+    font-size:20px; ;
+
+}
+.btn1:hover{
+    background-color: rgb(84, 18, 225); 
+    color: aliceblue;
+}
+
+</style>
+</head>
+<body>
+    <div class="chriscardbottom">
+        <div class="d-flex flex-row justify-content-start">
+            {% for i in data %}
+        <div class="christamasscard">
+        <img src="{{url_for('static',filename=i[0]+'.jpg')}}"  class="imagetree" alt="">
+        <h3 class="head2">{{i[1]}}</h3>
+        <p>Quantity :{{i[2]}}</p>
+        <p class="chrispara">Expired-Date:{{i[3]}}</p>
+        <a href="{{url_for('delivery')}}" target="_blank"><button class="btn1">Order Now</button></a>
+        </div>
+        {% endfor %}
+        
+        
+        <!--
+        <div class="christamasscard">
+            <img src="https://img.freepik.com/free-photo/bitter-melon_74190-4097.jpg?size=626&ext=jpg&ga=GA1.2.2102601201.1670175514&semt=ais"  class="imagetree" alt="">
+            <h3 class="head2">Cucumber</h3>
+            <p>Quantity :1 kg</p>
+            <p class="chrispara">Rs.50</p>
+            </div>
+        <div class="christamasscard">
+            <img src="https://img.freepik.com/free-photo/natural-peas_144627-13531.jpg?w=360&t=st=1683451136~exp=1683451736~hmac=6e1aa0db41cf029e5189fea0b35af576741c059eb7df3fb7ac912f38da3187fc"  class="imagetree" alt="">
+            <h3 class="head2">Green Beans</h3>
+            <p>Quantity :1 kg</p>
+            <p class="chrispara">Rs.60</p>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-start">
+        <div class="christamasscard">
+        <img src="https://c8.alamy.com/zooms/9/548e5b535083402897edf6cfaa4c793d/2df5y9j.jpg"  class="imagetree" alt="">
+        <h3 class="head2">Tomatoes,Onions,Ginger,Garlic</h3>
+        <p>Quantity :1 kg</p>
+        <p class="chrispara">Rs.100</p>
+        </div>
+        <div class="christamasscard">
+            <img src="https://img.freepik.com/premium-photo/one-eggplant-eggplant-slices_88281-2482.jpg?size=626&ext=jpg&ga=GA1.2.2102601201.1670175514&semt=sph"  class="imagetree" alt="">
+            <h3 class="head2">Brinjal</h3>
+            <p>Quantity :1 kg</p>
+            <p class="chrispara">Rs.75</p>
+            </div>
+        <div class="christamasscard">
+            <img src="https://5.imimg.com/data5/BC/VK/QP/SELLER-66774100/christmas-light-1000x1000.jpg"  class="imagetree" alt="">
+            <h3 class="head2">Christmas Lights</h3>
+            <p class="chrispara">Rs.500</p>
+            </div>
+        <div class="christamasscard">
+            <img src="https://5.imimg.com/data5/BC/VK/QP/SELLER-66774100/christmas-light-1000x1000.jpg"  class="imagetree" alt="">
+            <h3 class="head2">Christmas Lights</h3>
+            <p class="chrispara">Rs.500</p>
+            </div>
+        <div class="christamasscard">
+            <img src="https://5.imimg.com/data5/BC/VK/QP/SELLER-66774100/christmas-light-1000x1000.jpg"  class="imagetree" alt="">
+            <h3 class="head2">Christmas Lights</h3>
+            <p class="chrispara">Rs.500</p>
+            </div>
+        <div class="christamasscard">
+            <img src="https://5.imimg.com/data5/BC/VK/QP/SELLER-66774100/christmas-light-1000x1000.jpg"  class="imagetree" alt="">
+            <h3 class="head2">Christmas Lights</h3>
+            <p class="chrispara">Rs.500</p>
+            </div>
+            </div>
+        </div>-->
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>
